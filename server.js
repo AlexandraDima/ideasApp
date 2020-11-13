@@ -15,8 +15,23 @@ app.use(bodyParser.json());
 
 app.use(cors()); // Enable Cross Origin Resource Sharing across all routes. Basically open up your API to everyone.
 app.use(morgan("combined"));
-//app.use(express.static("./client/build")); // Only needed when running build in production mode
+app.use(express.static("./client/build")); // Only needed when running build in production mode
 
+let db = {}; //Empty DB object
+
+// Require and connect the DB
+ require("./db")
+  .connectDb()
+  .then(async dbObject => {
+    db = dbObject; // Save a copy of the db object for the routes above.
+    await db.randomQuestions(); // Fill in test data if needed.
+
+    // When DB connection is ready, let's open the API for access
+    app.listen(port, () => {
+      console.log(`${appName} API running on port ${port}!`);
+    });
+  })
+  .catch(error => console.error(error)); 
 //Routes
 //Read questions
 app.get("/api/questions", (request, response) => {
@@ -59,23 +74,9 @@ app.put(
 
 
 
-let db = {}; //Empty DB object
 
-// Require and connect the DB
- require("./db")
-  .connectDb()
-  .then(async dbObject => {
-    db = dbObject; // Save a copy of the db object for the routes above.
-    await db.randomQuestions(); // Fill in test data if needed.
-
-    // When DB connection is ready, let's open the API for access
-    app.listen(port, () => {
-      console.log(`${appName} API running on port ${port}!`);
-    });
-  })
-  .catch(error => console.error(error)); 
   
-   if(process.env.NODE_ENV === 'production'){
+  /*  if(process.env.NODE_ENV === 'production'){
     //Set static folder
     app.use(express.static('./client/build'));
    
@@ -83,5 +84,5 @@ let db = {}; //Empty DB object
        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
     })
    
-   }  
+   }   */
      
