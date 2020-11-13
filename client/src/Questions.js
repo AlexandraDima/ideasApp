@@ -21,7 +21,7 @@ class Questions extends Component {
     return (
       <div>
         
-         <div className="m-5">
+         <div className="mt-5 mb-5">
           <AskQuestion askQuestion={text => this.props.askQuestion(text)} />
         </div>
         <div className="card-columns mb-4">{contentQuestions}</div>

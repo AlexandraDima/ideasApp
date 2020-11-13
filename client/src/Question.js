@@ -45,13 +45,13 @@ class Question extends Component {
       }
     }
     return (
-      <div className="m-5">
+      <div className="mt-5 mb-5">
         <div className="question card bg-cards text-center p-3 col-lg-4">
         <i className="fa fa-lightbulb-o fa-3x" aria-hidden="true"></i>
           <h4 className="card-title"> {title}</h4>
         </div>
         <div>
-        <div className="m-5">
+        <div className="mt-5 mb-5">
             <PostAnswer
               qid={this.props.id}
               postAnswer={(questionId, text) =>
