@@ -130,7 +130,7 @@ class Db {
 module.exports.connectDb = async () => {
   const url = process.env.MONGO_URL ||  "mongodb://localhost/ideas-db";
   return mongoose
-    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => {
       console.log("Ideas database connected");
       return new Db();
