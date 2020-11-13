@@ -127,15 +127,17 @@ class Db {
 // It only resolves when the database connection is ready.
 // It resolves with an Db object instantiated from the class above.
 // The Db object is used for all data access in this app.
-module.exports.connectDb = async () => {
-  const url = process.env.MONGO_URL ||  "mongodb://localhost/ideas-db";
+  module.exports.connectDb = async () => {
+ 
+  const url = process.env.MONGO_URL * ||  "mongodb://localhost/ideas-db";
   return mongoose
-    .connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-    .then(() => {
-      console.log("Ideas database connected");
-      return new Db();
-    })
-    .catch(error => {
-      console.error(error);
-    });
-};
+  .connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+  .then(() => {
+    console.log("Ideas database connected");
+    return new Db();
+  })
+  .catch(error => {
+    console.error(error);
+  });
+ 
+}; 

@@ -55,11 +55,13 @@ app.put(
   }
 );
 
-/**** Start! ****/
+
+
+
 let db = {}; //Empty DB object
 
 // Require and connect the DB
-require("./db")
+ require("./db")
   .connectDb()
   .then(async dbObject => {
     db = dbObject; // Save a copy of the db object for the routes above.
@@ -70,11 +72,4 @@ require("./db")
       console.log(`${appName} API running on port ${port}!`);
     });
   })
-  .catch(error => console.error(error));
-
-/*   if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('client/build/'));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-   })
-  } */
+  .catch(error => console.error(error)); 
