@@ -14,7 +14,7 @@ const port = process.env.PORT || 8080; // Pick either port 8080 or the port in t
 app.use(bodyParser.json());
 app.use(cors()); // Enable Cross Origin Resource Sharing across all routes. Basically open up your API to everyone.
 app.use(morgan("combined"));
-app.use(express.static("./client/build")); // Only needed when running build in production mode
+//app.use(express.static("./client/build")); // Only needed when running build in production mode
 
 //Routes
 //Read questions
@@ -73,3 +73,14 @@ let db = {}; //Empty DB object
     });
   })
   .catch(error => console.error(error)); 
+  
+  if(process.env.NODE_ENV === 'production'){
+    //Set static folder
+    app.use(express.static('client/build'));
+   
+    app.get('*', (req, res) => {
+       res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    })
+   
+   } 
+     
