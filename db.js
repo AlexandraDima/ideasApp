@@ -129,7 +129,7 @@ class Db {
 // The Db object is used for all data access in this app.
   module.exports.connectDb = async () => {
  
-  const url = "mongodb+srv://AlexandraDima:Bromuradevinil@appideas.c4nut.mongodb.net/<dbname>?retryWrites=true&w=majority" /* ||  "mongodb://localhost/ideas-db" */;
+  const url = process.env.MONGO_URL ||  "mongodb://localhost/ideas-db";
   return mongoose
   .connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(() => {
